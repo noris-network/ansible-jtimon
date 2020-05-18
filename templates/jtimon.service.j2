@@ -1,0 +1,44 @@
+{{ ansible_managed | comment }}
+[Unit]
+Description=jtimon - Junos Telemetry Streaming Client
+After=network-online.target
+StartLimitInterval=0
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+PIDFile=/var/run/jtimon.pid
+User={{ jtimon_user }}
+Group={{ jtimon_user }}
+PermissionsStartOnly=true
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/jtimon \
+  {% for flag, flag_value in jtimon_cli_flags.items() -%}
+  --{{ flag }}={{ flag_value }} \
+  {% endfor -%}
+  --config /etc/jtimon.json
+
+SyslogIdentifier=jtimon
+KillMode=process
+Restart=always
+RestartSec=5
+
+LockPersonality=true
+NoNewPrivileges=true
+MemoryDenyWriteExecute=true
+PrivateTmp=true
+ProtectHome=true
+RemoveIPC=true
+RestrictSUIDSGID=true
+
+{% if jtimon_systemd_version | int >= 232 %}
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+ProtectSystem=strict
+{% else %}
+ProtectSystem=full
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target

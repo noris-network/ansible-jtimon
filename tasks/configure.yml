@@ -1,0 +1,19 @@
+---
+- name: jtimon | create systemd service unit
+  template:
+    src: jtimon.service.j2
+    dest: /etc/systemd/system/jtimon.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart jtimon
+
+- name: jtimon | configure jtimon
+  template:
+    src: jtimon.json.j2
+    dest: /etc/jtimon.json
+    owner: "{{ jtimon_user }}"
+    group: "{{ jtimon_user }}"
+    mode: 0644
+  notify: restart jtimon

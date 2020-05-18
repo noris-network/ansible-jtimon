@@ -1,2 +1,7 @@
 ---
-# handlers file for ansible-jtimon
+- name: restart jtimon
+  become: true
+  systemd:
+    daemon_reload: true
+    name: jtimon
+    state: restarted
