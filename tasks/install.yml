@@ -28,7 +28,7 @@
 - name: jtimon | propagate jtimon binary
   copy:
     src: "/tmp/jtimon"
-    dest: "/usr/local/bin/jtimon"
+    dest: "{{ jtimon_bin }}"
     mode: 0750
     owner: "{{ jtimon_user }}"
     group: "{{ jtimon_user }}"

@@ -3,6 +3,8 @@ jtimon_user: jtimon
 
 jtimon_version: 2.2.1
 
+jtimon_bin: /usr/local/bin/jtimon
+
 jtimon_cli_flags: {}
 # jtimon_cli_flags:
   # prometheus: true

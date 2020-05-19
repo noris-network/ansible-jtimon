@@ -12,7 +12,7 @@ User={{ jtimon_user }}
 Group={{ jtimon_user }}
 PermissionsStartOnly=true
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/jtimon \
+ExecStart={{ jtimon_bin }} \
   {% for flag, flag_value in jtimon_cli_flags.items() -%}
   --{{ flag }}={{ flag_value }} \
   {% endfor -%}
