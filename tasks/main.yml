@@ -1,2 +1,16 @@
 ---
-# tasks file for ansible-jtimon
+- include: preflight.yml
+  tags:
+    - jtimon_install
+    - jtimon_configure
+    - jtimon_run
+
+- include: install.yml
+  become: true
+  tags:
+    - jtimon_install
+
+- include: configure.yml
+  become: true
+  tags:
+    - jtimon_configure

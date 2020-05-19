@@ -1,0 +1,36 @@
+---
+- name: jtimon | create jtimon system group
+  group:
+    name:  "{{ jtimon_user }}"
+    system: true
+    state: present
+
+- name: jtimon | create jtimon system user
+  user:
+    name: "{{ jtimon_user }}"
+    system: true
+    shell: "/usr/sbin/nologin"
+    group: "{{ jtimon_user }}"
+    createhome: false
+
+- name: jtimon | download jtimon binary to local folder
+  become: false
+  get_url:
+    url: "https://github.com/nileshsimaria/jtimon/releases/download/v{{ jtimon_version }}/jtimon-linux-amd64"
+    dest: "/tmp/jtimon"
+  register: _download_binary
+  until: _download_binary is succeeded
+  retries: 5
+  delay: 2
+  delegate_to: localhost
+  check_mode: false
+
+- name: jtimon | propagate jtimon binary
+  copy:
+    src: "/tmp/jtimon"
+    dest: "{{ jtimon_bin }}"
+    mode: 0750
+    owner: "{{ jtimon_user }}"
+    group: "{{ jtimon_user }}"
+  notify:
+    - restart jtimon

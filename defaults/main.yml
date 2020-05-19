@@ -1,2 +1,21 @@
 ---
-# defaults file for ansible-jtimon
+jtimon_user: jtimon
+
+jtimon_version: 2.2.1
+
+jtimon_bin: /usr/local/bin/jtimon
+
+jtimon_cli_flags: {}
+# jtimon_cli_flags:
+  # prometheus: true
+  # prometheus-port: 8090
+
+jtimon_config: {}
+# jtimon_config:
+#   host: 192.168.42.10
+#   port: 50051
+#   paths:
+#     - path: "/interfaces"
+#       freq: 4000
+#     - path: "/lacp"
+#       freq: 4000
