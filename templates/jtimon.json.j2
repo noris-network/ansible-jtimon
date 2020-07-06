@@ -1,1 +1,7 @@
-{{ jtimon_config | to_nice_json(indent=2) | indent(2, False) }}
+{
+    "config_file_list": [
+{% for config in jtimon_config_hosts %}
+        "{{ jtimon_etc }}/config-{{ config.host }}.json"{{ "," if not loop.last }}
+{% endfor %}
+    ]
+}
