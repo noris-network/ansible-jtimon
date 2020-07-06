@@ -1,0 +1,8 @@
+---
+- hosts: all
+  remote_user: root
+
+  roles:
+    - role: ../../ansible-jtimon
+      vars:
+        x: 42

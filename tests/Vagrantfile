@@ -1,0 +1,40 @@
+Vagrant.configure("2") do |config| 
+    config.vm.provider "virtualbox" do |vb| 
+        vb.memory = "1024" 
+        vb.cpus = "1"
+    end
+    
+    # CentOS 7 VM
+    config.vm.define "centos7" do |centos|
+      centos.vm.box = "centos/7"
+      centos.vm.provider "virtualbox" do |vb|
+      end
+    end
+
+    # CentOS 8 VM
+    config.vm.define "centos8" do |centos|
+      centos.vm.box = "centos/8"
+      centos.vm.provider "virtualbox" do |vb|
+      end
+    end
+ 
+    # Debian 9 VM
+    config.vm.define "debian9" do |debian|
+      debian.vm.box = "debian/stretch64"
+      debian.vm.provider "virtualbox" do |vb|
+      end
+    end
+
+    # Debian 10 VM
+    config.vm.define "debian10" do |debian|
+      debian.vm.box = "debian/buster64"
+      debian.vm.provider "virtualbox" do |vb|
+      end
+    end
+
+    config.vm.provision "ansible" do |ansible|
+        ansible.become = true
+        ansible.verbose = "v"
+        ansible.playbook = "test.yml"
+    end
+end
