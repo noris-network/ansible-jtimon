@@ -29,8 +29,7 @@
   copy:
     src: "/tmp/jtimon"
     dest: "{{ jtimon_bin }}"
-    mode: 0750
     owner: "{{ jtimon_user }}"
     group: "{{ jtimon_user }}"
-  notify:
-    - restart jtimon
+    mode: 0750
+  notify: restart jtimon

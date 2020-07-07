@@ -6,14 +6,31 @@
     owner: root
     group: root
     mode: 0644
-  notify:
-    - restart jtimon
+  notify: restart jtimon
 
-- name: jtimon | configure jtimon
+- name: jtimon | create config directory
+  file:
+    path: "{{ jtimon_etc }}"
+    state: directory
+    owner: "{{ jtimon_user }}"
+    group: "{{ jtimon_user }}"
+    mode: 0755
+
+- name: jtimon | configure jtimon main
   template:
     src: jtimon.json.j2
-    dest: /etc/jtimon.json
+    dest: "{{ jtimon_etc }}/jtimon.json"
     owner: "{{ jtimon_user }}"
     group: "{{ jtimon_user }}"
     mode: 0644
+  notify: restart jtimon
+
+- name: jtimon | configure jtimon hosts
+  template:
+    src: jtimon-host.json.j2
+    dest: "{{ jtimon_etc }}/config-{{item.host}}.json"
+    owner: "{{ jtimon_user }}"
+    group: "{{ jtimon_user }}"
+    mode: 0644
+  loop: "{{ jtimon_config_hosts }}"
   notify: restart jtimon

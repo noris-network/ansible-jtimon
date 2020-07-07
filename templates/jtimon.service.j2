@@ -16,7 +16,7 @@ ExecStart={{ jtimon_bin }} \
   {% for flag, flag_value in jtimon_cli_flags.items() -%}
   --{{ flag }}={{ flag_value }} \
   {% endfor -%}
-  --config /etc/jtimon.json
+  --config-file-list {{ jtimon_etc }}/jtimon.json
 
 SyslogIdentifier=jtimon
 KillMode=process
