@@ -4,16 +4,18 @@ jtimon_version: 2.2.1
 jtimon_user: jtimon
 jtimon_bin: /usr/local/bin/jtimon
 jtimon_etc: /etc/jtimon
+jtimon_port: 8090
 
 jtimon_cli_flags:
   prometheus: true
   prometheus-host: 0.0.0.0
-  prometheus-port: 8090
-  max-run: 30
+  prometheus-port: "{{ jtimon_port }}"
+  log-mux-stdout: true
 
-jtimon_config_hosts: {}
+jtimon_config_hosts: []
 # - host: router1.fqdn.de
 #   port: 50051
+#   cid: "{{ ansible_fqdn }}"
 #   paths:
 #     - path: "/interfaces"
 #       freq: 4000
@@ -21,6 +23,7 @@ jtimon_config_hosts: {}
 #       freq: 4000
 # - host: router2.fqdn.de
 #   port: 50051
+#   cid: "{{ ansible_fqdn }}"
 #   paths:
 #     - path: "/interfaces"
 #       freq: 4000

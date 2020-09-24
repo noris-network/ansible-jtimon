@@ -4,6 +4,8 @@
 
 Installs [jtimon](https://github.com/nileshsimaria/jtimon/), JunOS Telemetry Interface client.
 
+This role is tests on Centos 7+8, Debian 9+10, Ubuntu 18.04 + 20.04.
+
 ## Requirements
 
 Ansible >= 2.7 (It might work on previous versions, but we cannot guarantee it)
@@ -16,6 +18,7 @@ Name|Default Value|Description
 `jtimon_user`|jtimon|The linux user & group to setup on the target system for running jtimon.
 `jtimon_bin`|/usr/local/bin|The location of the jtimon binary on the targets.
 `jtimon_etc`|/etc/jtimon|The location of the jtimon config on the targets.
+`jtimon_port`|8090|The port jtimon should listen on. Used for firewall and cli_flags.
 `jtimon_cli_flags`|-|CLI flags to be passed to the binary on start. See [defaults](defaults/main.yml) for example.
 `jtimon_config_hosts`|{}|The config parameters which are used to create the `config-host.json` config file per host. See below or [defaults](defaults/main.yml) for example.
 
@@ -31,6 +34,7 @@ Name|Default Value|Description
         jtimon_config_hosts:
           - host: router1.fqdn.de
             port: 50051
+            cid: "{{ ansible_fqdn }}"
             paths:
               - path: "/interfaces"
                 freq: 4000
@@ -38,6 +42,7 @@ Name|Default Value|Description
                 freq: 4000
           - host: router2.fqdn.de
             port: 50051
+            cid: "{{ ansible_fqdn }}"
             paths:
               - path: "/interfaces"
                 freq: 4000
