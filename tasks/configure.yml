@@ -33,4 +33,5 @@
     group: "{{ jtimon_user }}"
     mode: 0644
   loop: "{{ jtimon_config_hosts }}"
+  when: jtimon_config_hosts | length > 0
   notify: restart jtimon
