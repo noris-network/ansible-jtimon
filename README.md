@@ -20,7 +20,9 @@ Name|Default Value|Description
 `jtimon_etc`|/etc/jtimon|The location of the jtimon config on the targets.
 `jtimon_port`|8090|The port jtimon should listen on. Used for firewall and cli_flags.
 `jtimon_cli_flags`|-|CLI flags to be passed to the binary on start. See [defaults](defaults/main.yml) for example.
-`jtimon_config_hosts`|{}|The config parameters which are used to create the `config-host.json` config file per host. See below or [defaults](defaults/main.yml) for example.
+`jtimon_config_hosts`|[]|The config parameters which are used to create the `config-host.json` config file per host. See below or [role defaults](defaults/main.yml) for examples.
+`jtimon_alias_content`||See [role variables](defaults/main.yml) for sane defaults.
+`jtimon_alias_file`|"{{ jtimon_etc }}/aliases.txt"|The location of alias.txt file.
 
 ## Example Playbook
 
@@ -33,19 +35,24 @@ Name|Default Value|Description
       vars:
         jtimon_config_hosts:
           - host: router1.fqdn.de
+            # your remote port
             port: 50051
+            # keep next 2 variables
             cid: "{{ ansible_fqdn }}"
+            alias: "{{ jtimon_alias_file }}"
             paths:
               - path: "/interfaces"
-                freq: 4000
+                # data every 10sec
+                freq: 10000
               - path: "/components"
-                freq: 4000
+                freq: 10000
           - host: router2.fqdn.de
             port: 50051
             cid: "{{ ansible_fqdn }}"
+            alias: "{{ jtimon_alias_file }}"
             paths:
               - path: "/interfaces"
-                freq: 4000
+                freq: 10000
 ```
 
 ## License

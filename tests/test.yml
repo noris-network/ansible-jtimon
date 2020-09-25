@@ -9,6 +9,7 @@
           - host: router1.fqdn.de
             port: 50051
             cid: "{{ ansible_fqdn }}"
+            alias: "{{ jtimon_alias_file }}"
             paths:
               - path: "/interfaces"
                 freq: 4000
@@ -17,6 +18,7 @@
           - host: router2.fqdn.de
             port: 50051
             cid: "{{ ansible_fqdn }}"
+            alias: "{{ jtimon_alias_file }}"
             paths:
               - path: "/interfaces"
                 freq: 4000
