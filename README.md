@@ -35,21 +35,24 @@ Name|Default Value|Description
       vars:
         jtimon_config_hosts:
           - host: router1.fqdn.de
+            # your remote port
             port: 50051
+            # keep next 2 variables
             cid: "{{ ansible_fqdn }}"
             alias: "{{ jtimon_alias_file }}"
             paths:
               - path: "/interfaces"
-                freq: 4000
+                # data every 10sec
+                freq: 10000
               - path: "/components"
-                freq: 4000
+                freq: 10000
           - host: router2.fqdn.de
             port: 50051
             cid: "{{ ansible_fqdn }}"
             alias: "{{ jtimon_alias_file }}"
             paths:
               - path: "/interfaces"
-                freq: 4000
+                freq: 10000
 ```
 
 ## License
