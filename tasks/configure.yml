@@ -16,6 +16,15 @@
     group: "{{ jtimon_user }}"
     mode: 0755
 
+- name: jtimon | configure jtimon aliases
+  template:
+    src: jtimon-aliases.txt.j2
+    dest: "{{ jtimon_alias_file }}"
+    owner: "{{ jtimon_user }}"
+    group: "{{ jtimon_user }}"
+    mode: 0644
+  notify: restart jtimon
+
 - name: jtimon | configure jtimon main
   template:
     src: jtimon.json.j2
