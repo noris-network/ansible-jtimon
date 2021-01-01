@@ -1,2 +1,2 @@
 ---
-# vars file for ansible-jtimon
+jtimon_servicename: jtimon
