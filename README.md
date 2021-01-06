@@ -4,7 +4,14 @@
 
 Installs [jtimon](https://github.com/nileshsimaria/jtimon/), JunOS Telemetry Interface client.
 
-This role is tests on Centos 7+8, Debian 9+10, Ubuntu 18.04 + 20.04.
+The role is tested on vagrant:
+
+- Centos 7
+- Centos 8
+- Debian 9
+- Debian 10
+- Ubuntu 18.04
+- Ubuntu 20.04
 
 ## Requirements
 
