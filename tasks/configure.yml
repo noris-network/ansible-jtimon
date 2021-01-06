@@ -8,6 +8,13 @@
     mode: 0644
   notify: restart jtimon
 
+- name: start and enable jtimon
+  become: true
+  systemd:
+    name: "{{ jtimon_servicename }}"
+    state: started
+    enabled: yes
+
 - name: jtimon | create config directory
   file:
     path: "{{ jtimon_etc }}"
