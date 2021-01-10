@@ -1,7 +1,7 @@
 {
     "config_file_list": [
 {% for config in jtimon_config_hosts %}
-        "{{ jtimon_etc }}/config-{{ config.host }}.json"{{ "," if not loop.last }}
+        "{{ jtimon_etc }}/config-{{ config.host }}.json"{{ "," if not loop.last else ""  }}
 {% endfor %}
     ]
 }
